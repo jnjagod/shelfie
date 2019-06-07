@@ -16,7 +16,7 @@ export default class Form extends Component {
     componentDidUpdate(oldProps){
         let {id, imageUrl, name, price} = this.props.currentProduct
         if(oldProps.id !== this.props.currentProduct.id){
-            this.setState(id, imageUrl, name, price)
+            this.setState({id, imageUrl, name, price})
         }
     }
 
@@ -26,6 +26,21 @@ export default class Form extends Component {
         this.setState({
           [name]: value
         })
+    }
+
+    handleUpdate = () => {
+        let { id, imageUrl, name, price } = this.state
+        let product = {
+            imageUrl,
+            name,
+            price
+          }
+          axios.put(`/api/product/${id}`, product)
+            .then(res => {
+              this.props.getInventory();
+              this.clearInputs();
+            })
+            .catch(err => console.log(err))
     }
 
     clearInputs = () => {
@@ -74,7 +89,7 @@ export default class Form extends Component {
                 value={this.state.price} />
                 <button onClick={this.clearInputs} >Cancel</button>
                 {this.state.id ?
-                <button onClick={this.handleCreate} >Save Changes</button>
+                <button onClick={this.handleUpdate} >Save Changes</button>
                 :   
                 <button onClick={this.handleCreate} >Add to Inventory</button>
                 }

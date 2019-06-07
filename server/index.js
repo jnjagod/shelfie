@@ -17,6 +17,7 @@ app.use(express.json())
 app.get('/api/inventory', ProductCtrl.read)
 app.post('/api/product', ProductCtrl.create)
 app.delete('/api/product/:id', ProductCtrl.delete)
+app.put('/api/product/:id', ProductCtrl.update)
 
 app.listen(SERVER_PORT, () => {
     console.log(`listening on port ${SERVER_PORT}`)

@@ -16,7 +16,7 @@ export default class Dashboard extends Component {
                 <h1>Dashboard</h1>
                 {this.props.inventory.map( elem => {
                     return(
-                    <Product key={elem.id} item={elem} deleteProduct={this.deleteProduct} />
+                    <Product key={elem.id} item={elem} deleteProduct={this.deleteProduct} selectProduct={this.props.selectProduct} />
                     )
                 })}
             </div>
